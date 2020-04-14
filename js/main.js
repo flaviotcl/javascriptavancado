@@ -1,16 +1,28 @@
 
 var list = [
-    { descricao : 'rice', amount : '1', valor: '5.40'},
-    { descricao : 'beer', amount : '12', valor: '1.99'},
-    { descricao : 'meat', amount : '1', valor: '15.00'}
+    { description : 'rice', amount : '1', value: '5.40'},
+    { description : 'beer', amount : '12', value: '1.99'},
+    { description : 'meat', amount : '1', value: '15.00'}
 ]
 function getTotal(list){
 
     var total = 0
     for (var key in list){
-        total += list[key].valor * list[key].amount
+        total += list[key].value * list[key].amount
     }
     return total
 }
 
-console.log(getTotal(list))
+function setList(list){
+    var table = '<thead><tr><td>Description</td><td>Amount</td><td>Value</td><td>Action</td></tr></thead><tbody>'
+
+    for(var key in list){
+        table += '<tr><td>'+ list[key].description +'</td><td>'+ list[key].amount +'</td><td>'+ list[key].value +'</td><td>Edit | Delete</td></tr>'
+    }
+
+    table += '</tbody>'
+    document.getElementById('listTable').innerHTML = table
+
+}
+//console.log(getTotal(list))
+setList(list)
