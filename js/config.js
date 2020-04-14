@@ -3,8 +3,8 @@ function setConfig(){
         title: 'Shopping Control'
     }
     document.title = texts.title
-    document.getElementById('navTitle').innerText = texts.title
-    //console.log(  document.getElementById('navTitle'))
+    document.getElementById('navTitle').innerHTML = texts.title
+    console.log(  document.getElementById('navTitle'))
    
 }
 setConfig()
