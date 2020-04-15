@@ -17,7 +17,7 @@ function setList(list){
     var table = '<thead><tr><td>Description</td><td>Amount</td><td>Value</td><td>Action</td></tr></thead><tbody>'
 
     for(var key in list){
-        table += '<tr><td>'+ formatDesc(list[key].description) +'</td><td>'+ list[key].amount +'</td><td>'+ formatValue(list[key].value) +'</td><td>Edit | Delete</td></tr>'
+        table += '<tr><td>'+ formatDesc(list[key].description) +'</td><td>'+ list[key].amount +'</td><td>'+ formatValue(list[key].value) +'</td><td><button class="btn btn-default" onclick="setUpdate('+key+')">Edit </button>| Delete</td></tr>'
     }
 
     table += '</tbody>'
@@ -45,7 +45,27 @@ function addData(){
     list.unshift({description:desc.value, amount:amount.value, value:value.value })
     setList(list)
 }
+
+function setUpdate(id){
+    var obj  = list[id]
+    document.getElementById('desc').value = obj.description
+    document.getElementById('amount').value = obj.amount
+    document.getElementById('value').value = obj.value
+    document.getElementById('btnUpdate').style.display = 'inline-block'
+    document.getElementById('btnAdd').style.display = 'none'
+}
+function resetForm(){
+    document.getElementById('desc').value = ''
+    document.getElementById('amount').value = ''
+    document.getElementById('value').value = ''
+    document.getElementById('btnUpdate').style.display = 'none'
+    document.getElementById('btnAdd').style.display = 'inline-block'
+}
 var button = document.getElementById('btnAdd')
 button.addEventListener('click', addData)
+
+var btnCancel = document.getElementById('btnCancel')
+btnCancel.addEventListener('click',resetForm)
+
 //console.log(getTotal(list))
 setList(list)
