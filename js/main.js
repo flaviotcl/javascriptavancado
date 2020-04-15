@@ -53,6 +53,8 @@ function setUpdate(id){
     document.getElementById('value').value = obj.value
     document.getElementById('btnUpdate').style.display = 'inline-block'
     document.getElementById('btnAdd').style.display = 'none'
+
+    document.getElementById('inputIdUpdate').innerHTML = '<input id="idUpdate" type="hidden" value="'+id+'">'
 }
 function resetForm(){
     document.getElementById('desc').value = ''
@@ -60,6 +62,20 @@ function resetForm(){
     document.getElementById('value').value = ''
     document.getElementById('btnUpdate').style.display = 'none'
     document.getElementById('btnAdd').style.display = 'inline-block'
+
+    document.getElementById('inputIdUpdate').innerHTML = ''
+}
+
+function updateData(){
+    var id  =  document.getElementById('idUpdate').value 
+    var desc = document.getElementById('desc').value 
+    var amount = document.getElementById('amount').value
+    var value = document.getElementById('value').value 
+
+    list[id] = {description:desc, amount:amount, value:value}
+    
+    resetForm()
+    setList(list)
 }
 var button = document.getElementById('btnAdd')
 button.addEventListener('click', addData)
@@ -67,5 +83,7 @@ button.addEventListener('click', addData)
 var btnCancel = document.getElementById('btnCancel')
 btnCancel.addEventListener('click',resetForm)
 
+var btnSave = document.getElementById('btnSave')
+btnSave.addEventListener('click',updateData)
 //console.log(getTotal(list))
 setList(list)
