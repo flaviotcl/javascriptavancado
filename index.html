@@ -14,15 +14,28 @@
           </div>
         </div>
     </nav>
-    <div class="container-fluid">
+    <!-- Esta classe faz com q/ os itens do formulário fiquem alinhados.-->
+    <div class='form-inline'>
+          <div class='form-group' style='margin-left: 20px'>
+              <input type='text' class='form-control' placeholder='Description' id='desc'>
+          </div>
+          <div class='form-group'>
+            <input type='text' class='form-control' placeholder='Amount' id='amount'>
+          </div>
+          <div class='form-group'>
+            <input type='text' class='form-control' placeholder='Value' id='value'>
+          </div>
+          <button id='btnAdd' class='btn btn-default'>Add</button>
+    </div>
+    <div class='container-fluid'>
         
-        <table id="listTable" class="table">
+        <table id='listTable' class='table'>
         
         </table>
 
     </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/main.js"></script>
+    <script src='js/config.js'></script>
+    <script src='js/main.js'></script>
 </body>
 </html>
