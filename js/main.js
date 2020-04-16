@@ -25,6 +25,8 @@ function setList(list){
     table += '</tbody>'
     document.getElementById('listTable').innerHTML = table
     getTotal(list)
+
+    saveListLocalStorage(list)
 }
 function formatDesc(desc){
     str = desc.toLowerCase()
@@ -158,6 +160,19 @@ function deleteList(){
         setList(list)
     }
 }
+
+function saveListLocalStorage(){
+    var jsonStr = JSON.stringify(list)
+    localStorage.setItem('list',jsonStr)
+}
+
+function initListStorage(){
+    var testList = localStorage.getItem('list')
+    if(testList){
+        list = JSON.parse(testList)
+    }
+    setList(list)
+}
 var button = document.getElementById('btnAdd')
 button.addEventListener('click', addData)
 
@@ -173,4 +188,6 @@ btnDeleteList.addEventListener('click', deleteList)
 var btnReset = document.getElementById('btnReset')
 btnReset.addEventListener('click',resetForm)
 //console.log(getTotal(list))
-setList(list)
+//setList(list)
+
+initListStorage()
