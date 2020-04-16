@@ -56,7 +56,7 @@ function addData(){
 function setUpdate(id){
 
     document.getElementById('errors').style.display = 'none'
-    
+
     var obj  = list[id]
     document.getElementById('desc').value = obj.description
     document.getElementById('amount').value = obj.amount
@@ -152,6 +152,12 @@ function validation(){
         return 1
     }
 }
+function deleteList(){
+    if(confirm('Delete this List ?')){
+        list = []
+        setList(list)
+    }
+}
 var button = document.getElementById('btnAdd')
 button.addEventListener('click', addData)
 
@@ -160,5 +166,11 @@ btnCancel.addEventListener('click',resetForm)
 
 var btnSave = document.getElementById('btnSave')
 btnSave.addEventListener('click',updateData)
+
+var btnDeleteList = document.getElementById('btnDeleteList')
+btnDeleteList.addEventListener('click', deleteList)
+
+var btnReset = document.getElementById('btnReset')
+btnReset.addEventListener('click',resetForm)
 //console.log(getTotal(list))
 setList(list)
