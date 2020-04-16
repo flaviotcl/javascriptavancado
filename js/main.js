@@ -10,6 +10,8 @@ function getTotal(list){
     for (var key in list){
         total += list[key].value * list[key].amount
     }
+    document.getElementById('totalValue').innerHTML = formatValue(total)
+   // console.log(total)
     return total
 }
 
@@ -22,7 +24,7 @@ function setList(list){
 
     table += '</tbody>'
     document.getElementById('listTable').innerHTML = table
-
+    getTotal(list)
 }
 function formatDesc(desc){
     str = desc.toLowerCase()
@@ -52,6 +54,9 @@ function addData(){
 }
 
 function setUpdate(id){
+
+    document.getElementById('errors').style.display = 'none'
+    
     var obj  = list[id]
     document.getElementById('desc').value = obj.description
     document.getElementById('amount').value = obj.amount
