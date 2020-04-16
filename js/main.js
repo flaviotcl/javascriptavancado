@@ -17,7 +17,7 @@ function setList(list){
     var table = '<thead><tr><td>Description</td><td>Amount</td><td>Value</td><td>Action</td></tr></thead><tbody>'
 
     for(var key in list){
-        table += '<tr><td>'+ formatDesc(list[key].description) +'</td><td>'+ list[key].amount +'</td><td>'+ formatValue(list[key].value) +'</td><td><button class="btn btn-default" onclick="setUpdate('+key+')">Edit </button> <button class="btn btn-default" onclick="deleteItem('+key+')">Delete</button></td></tr>'
+        table += '<tr><td>'+ formatDesc(list[key].description) +'</td><td>'+ formatAmount(list[key].amount) +'</td><td>'+ formatValue(list[key].value) +'</td><td><button class="btn btn-default" onclick="setUpdate('+key+')">Edit </button> <button class="btn btn-default" onclick="deleteItem('+key+')">Delete</button></td></tr>'
     }
 
     table += '</tbody>'
@@ -29,6 +29,9 @@ function formatDesc(desc){
     str = str.charAt(0).toUpperCase() + str.slice(1)
     return str
 }
+function formatAmount(amount){
+    return parseInt(amount)
+}
 function formatValue(value){
     str = parseFloat(value).toFixed(2) + ' '
     str = str.replace('.',',')
@@ -37,7 +40,9 @@ function formatValue(value){
 }
 
 function addData(){
-    
+    if (!validation()){
+        return
+    }
     var desc = document.getElementById('desc')
     var amount = document.getElementById('amount')
     var value = document.getElementById('value')
@@ -64,9 +69,15 @@ function resetForm(){
     document.getElementById('btnAdd').style.display = 'inline-block'
 
     document.getElementById('inputIdUpdate').innerHTML = ''
+
+    document.getElementById('errors').style.display = 'none'
+
 }
 
 function updateData(){
+    if (!validation()){
+        return
+    }
     var id  =  document.getElementById('idUpdate').value 
     var desc = document.getElementById('desc').value 
     var amount = document.getElementById('amount').value
@@ -93,6 +104,48 @@ function deleteItem(id){
         setList(list)
     }
 
+}
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function validation(){
+    var desc = document.getElementById('desc').value 
+    var amount = document.getElementById('amount').value
+    var value = document.getElementById('value').value 
+
+    var errors = ''
+    document.getElementById('errors').style.display = 'none'
+    if(desc == ''){
+        errors +=  '<p>Fill out Description</p>'
+    }else if( isNumber(desc) ){
+        errors +=  '<p>Fill out a valid Description</p>'
+    }
+
+    if( amount == ''){
+        errors +=  '<p>Fill out Amount</p>'
+    }else if(amount != parseInt(amount)){
+        errors +=  '<p>Fill out a valid Amount</p>'
+    }
+
+    if( value == ''){
+        errors +=  '<p>Fill out Value</p>'
+    }else if(value != parseFloat(value)){
+        errors +=  '<p>Fill out a valid Value</p>'
+    }
+
+    if(errors != ''){
+        document.getElementById('errors').style.display = 'block'
+        document.getElementById('errors').style.backgroundColor = 'rgba(85,85,85,0.3)'
+        document.getElementById('errors').style.margin = '10px'
+        document.getElementById('errors').style.padding = '10px'
+        document.getElementById('errors').style.color = 'white'
+        document.getElementById('errors').style.borderRadius = '13px'
+
+        document.getElementById('errors').innerHTML = "<h3>Error : </h3>" + errors
+        return 0
+    }else{
+        return 1
+    }
 }
 var button = document.getElementById('btnAdd')
 button.addEventListener('click', addData)
